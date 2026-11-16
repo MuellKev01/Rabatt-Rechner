@@ -4,21 +4,42 @@ package org.example;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     static void main() {
-int Betrag = 100;
 
+        double betrag = 100.1;
         boolean istMitglied = true;
         boolean hatGutschein = false;
 
-            if(Betrag>100 && istMitglied){
-                System.out.println("20% Rabatt");
+        String ergebniss = berechneEndpreis(betrag, istMitglied, hatGutschein);
+
+        System.out.println(ergebniss);
+
+    }
+
+    public static String berechneEndpreis(double warenwert,
+            boolean istMitglied, boolean hatGutschein) {
+                String ergebniss;
+                double preis;
+
+            if(warenwert > 100 && istMitglied){
+                preis = berechnung(warenwert, 20);
+                ergebniss = "20% Rabatt,Endpreis:" + preis;
             }
-            else if(Betrag>200 && hatGutschein){
-                System.out.println("10% Rabatt");
+            else if(warenwert > 200 || hatGutschein){
+                preis = berechnung(warenwert, 10);
+                ergebniss = "10% Rabatt,Endpreis:" + preis;
             }
             else {
-                System.out.println("0% Rabatt");
+                ergebniss = "Kein Rabatt,Endpreis:" + warenwert;
             }
 
+            return ergebniss;
+
         }
+
+    static double berechnung(double preis, int prozent) {
+        double reduktion = preis / 100 * prozent;
+
+        return preis-reduktion;
     }
+}
 
