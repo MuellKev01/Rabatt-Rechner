@@ -5,6 +5,41 @@ package org.example;
 public class Main {
     static void main() {
 
-        }
+        double betrag = 100.1;
+        boolean istMitglied = true;
+        boolean hatGutschein = false;
+
+        String ergebniss = berechneEndpreis(betrag, istMitglied, hatGutschein);
+
+        System.out.println(ergebniss);
+
     }
+
+    public static String berechneEndpreis(double warenwert,
+            boolean istMitglied, boolean hatGutschein) {
+                String ergebniss;
+                double preis;
+
+            if(warenwert > 100 && istMitglied){
+                preis = berechnung(warenwert, 20);
+                ergebniss = "20% Rabatt,Endpreis:" + preis;
+            }
+            else if(warenwert > 200 || hatGutschein){
+                preis = berechnung(warenwert, 10);
+                ergebniss = "10% Rabatt,Endpreis:" + preis;
+            }
+            else {
+                ergebniss = "Kein Rabatt,Endpreis:" + warenwert;
+            }
+
+            return ergebniss;
+
+        }
+
+    static double berechnung(double preis, int prozent) {
+        double reduktion = preis / 100 * prozent;
+
+        return preis-reduktion;
+    }
+}
 
